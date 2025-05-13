@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Humraz | Portfolio</title>
+  <script src="https://unpkg.com/scrollreveal"></script>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -17,9 +18,10 @@
 
   <!-- Hero Section -->
   <section id="hero">
+    <img src="images/humraz.jpg" alt="Humraz Profile" class="profile-img" >
     <div class="hero-content">
       <h2>Hey, I’m Humraz</h2>
-      <p>Creative Technologist | Poster Designer | Event Planner</p>
+     <p><span class="typewriter"></span></p>
       <a href="#projects" class="btn">View My Work</a>
     </div>
   </section>
@@ -27,7 +29,7 @@
   <!-- About Me -->
   <section id="about">
     <h2>About Me</h2>
-    <p> I’m Humraz, a BCA student at MES M.K. Mackar Pillay College,<mark> passionate about technology, creativity, and innovation</mark>. I'm an event planner for the Computer Science Department Association BYTE BEGIN, where I help organize tech fests, tournaments, and workshops. I love blending tech with creativity—whether it's through graphic design, developing educational websites, or integrating AI assistants.<br>
+    <p> I’m Humraz, a BCA student at MES M.K. Mackar Pillay College,passionate about technology, creativity, and innovation. I'm an event planner for the Computer Science Department Association BYTE BEGIN, where I help organize tech fests, tournaments, and workshops. I love blending tech with creativity—whether it's through graphic design, developing educational websites, or integrating AI assistants.<br>
 
 I run a small business called Origin Media, where I create and sell custom wall posters, and I’m also working on a website for it. Besides that, I’m building a platform to teach programming languages like HTML and C in a clear and engaging way, with plans to include AI help for learners.<br>
 
@@ -82,6 +84,54 @@ My background includes being an SPC Commander, designing posters using Canva, ex
   <footer>
     <p>&copy; 2025 Humraz | All Rights Reserved</p>
   </footer>
+                        <script>
+  const phrases = ["BCA Student", "Designer", "Technologist", "Founder of Origin Media"];
+  const el = document.querySelector(".typewriter");
+  let i = 0, j = 0, currentPhrase = [], isDeleting = false, isEnd = false;
+
+  function loop() {
+    isEnd = false;
+    el.innerHTML = currentPhrase.join("");
+
+    if (i < phrases.length) {
+      if (!isDeleting && j <= phrases[i].length) {
+        currentPhrase.push(phrases[i][j]);
+        j++;
+      }
+
+      if (isDeleting && j > 0) {
+        currentPhrase.pop();
+        j--;
+      }
+
+      if (j === phrases[i].length) {
+        isEnd = true;
+        isDeleting = true;
+      }
+
+      if (isDeleting && j === 0) {
+        currentPhrase = [];
+        isDeleting = false;
+        i++;
+        if (i === phrases.length) i = 0;
+      }
+    }
+
+    const speedUp = Math.random() * (80 - 50) + 50;
+    const normalSpeed = Math.random() * (200 - 100) + 100;
+    const time = isEnd ? 2000 : isDeleting ? speedUp : normalSpeed;
+    setTimeout(loop, time);
+  }
+
+  loop();
+                              ScrollReveal().reveal('section', {
+    origin: 'bottom',
+    distance: '50px',
+    duration: 1000,
+    delay: 200,
+    reset: true
+  });
+</script>
 
 </body>
 </html>
