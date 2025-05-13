@@ -6,8 +6,13 @@
   <title>Humraz | Portfolio</title>
   <script src="https://unpkg.com/scrollreveal"></script>
   <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
+
 </head>
 <body>
+<div id="loader-wrapper">
+  <div class="loader"></div>
+</div>
 
   <!-- Header -->
   <header>
@@ -75,6 +80,13 @@ My background includes being an SPC Commander, designing posters using Canva, ex
     <p>Event Planner for the Computer Science Department Association. Organized events like Nexora, Free Fire Tournament, and more.</p>
   </section>
 
+
+  <div class="project-card" data-aos="fade-up" data-aos-delay="100">
+  <img src="images/c-website.png" alt="C Website">
+  <h3>C Learning Website</h3>
+  <p>A full course for beginners to learn C programming.</p>
+</div>
+
   <!-- Contact -->
   <section id="contact">
     <h2>Contact Me</h2>
@@ -86,6 +98,10 @@ My background includes being an SPC Commander, designing posters using Canva, ex
   <footer>
     <p>&copy; 2025 Humraz | All Rights Reserved</p>
   </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script><script>
+  AOS.init();
+</script>
                         <script>
   const phrases = ["BCA Student", "Designer", "Technologist", "Founder of Origin Media"];
   const el = document.querySelector(".typewriter");
