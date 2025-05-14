@@ -106,7 +106,7 @@ header {
 #hero {
   height: 100vh;
   background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-  display: flex;
+  
   justify-content: center;
   align-items: center;
   text-align: center;
@@ -174,7 +174,7 @@ a {
   border: 1px solid rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(8px);
   padding: 20px;
-  width: 50%;
+  width: 20%;
   height: 100%;
   margin: 20px 0;
   border-radius: 15px;
