@@ -102,7 +102,7 @@ Improve accessibility & animations
 
 Want to connect or collaborate? Reach out here:
 
-Email: yourmail@example.com
+Email: muhammadhamraz201@example.com
 
 LinkedIn: linkedin.com/in/mhd-humraz
 
