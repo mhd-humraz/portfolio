@@ -45,9 +45,9 @@ This is the official repository for my personal portfolio website, built to repr
 
 ## 🖼 Screenshots
 
-> *(Add your screenshot at `/assets/preview.png` and uncomment below)*
 
-<!-- ![Portfolio Screenshot](assets/preview.png) -->
+
+![Portfolio Screenshot](Previewimg.jpg) 
 
 ---
 
