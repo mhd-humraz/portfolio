@@ -8,57 +8,168 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --primary: #2A3B7D;
+      --secondary: #FFD700;
+      --light: #f9f9fb;
+      --dark: #1e1e2c;
+    }
+    
     body {
       font-family: 'Inter', sans-serif;
-      background-color: #f9f9fb;
-      color: #1e1e2c;
+      background-color: var(--light);
+      color: var(--dark);
+      scroll-behavior: smooth;
     }
+    
     h1, h2, h3, .navbar-brand {
       font-weight: 700;
     }
+    
     .navbar {
-      background-color: #2A3B7D;
+      background-color: var(--primary);
+      transition: all 0.3s;
     }
+    
+    .navbar.scrolled {
+      padding-top: 5px;
+      padding-bottom: 5px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    
     .hero {
-      background: linear-gradient(135deg, #2A3B7D, #3A56B5);
+      background: linear-gradient(135deg, var(--primary), #3A56B5);
       color: #fff;
       padding: 6rem 0;
+      position: relative;
+      overflow: hidden;
     }
+    
+    .hero::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="0.1" d="M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,202.7C672,203,768,181,864,170.7C960,160,1056,160,1152,170.7C1248,181,1344,203,1392,213.3L1440,224L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+      background-size: cover;
+      background-position: center;
+    }
+    
+    .hero-content {
+      position: relative;
+      z-index: 1;
+    }
+    
     .btn-primary {
-      background-color: #FFD700;
+      background-color: var(--secondary);
       border: none;
       color: #000;
       font-weight: 600;
+      transition: all 0.3s;
     }
+    
     .btn-primary:hover {
       background-color: #e6c200;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     }
+    
     .project-card {
       transition: transform 0.3s, box-shadow 0.3s;
       border: none;
       box-shadow: 0 0 20px rgba(0,0,0,0.05);
+      height: 100%;
     }
+    
     .project-card:hover {
       transform: translateY(-8px);
       box-shadow: 0 8px 30px rgba(0,0,0,0.1);
     }
+    
     .skill-icon {
       font-size: 2.5rem;
-      color: #2A3B7D;
+      color: var(--primary);
+      transition: transform 0.3s;
     }
+    
+    .skill-icon:hover {
+      transform: scale(1.1);
+    }
+    
     footer {
-      background-color: #1E1E2C;
+      background-color: var(--dark);
       color: #fff;
     }
+    
     .badge {
       font-size: 0.85rem;
+    }
+    
+    .profile-img {
+      max-width: 300px;
+      border-radius: 10px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+    
+    .contact-form {
+      background: white;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    }
+    
+    .form-control {
+      border: 1px solid #e1e1e1;
+      padding: 0.75rem;
+    }
+    
+    .form-control:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 0.2rem rgba(42, 59, 125, 0.25);
+    }
+    
+    .social-icon {
+      transition: all 0.3s;
+    }
+    
+    .social-icon:hover {
+      transform: translateY(-3px);
+      color: var(--primary) !important;
+    }
+    
+    .section-title {
+      position: relative;
+      margin-bottom: 3rem;
+    }
+    
+    .section-title::after {
+      content: "";
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 4px;
+      background-color: var(--secondary);
+    }
+    
+    .about-section {
+      background: linear-gradient(to right, var(--light) 50%, white 50%);
+    }
+    
+    @media (max-width: 768px) {
+      .about-section {
+        background: var(--light);
+      }
     }
   </style>
 </head>
 <body>
 
 <!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top" id="navbar">
   <div class="container">
     <a class="navbar-brand" href="#">MUHAMMED HUMRAZ</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -66,7 +177,7 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto">
-        <li class="nav-item"><a class="nav-link" href="project.html">Projects</a></li>
+        <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
         <li class="nav-item"><a class="nav-link" href="https://mhd-humraz.github.io/pptx/">Canva</a></li>
         <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
         <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
@@ -78,10 +189,10 @@
 
 <!-- Hero Section -->
 <section class="hero text-center">
-  <div class="container">
-    <h1 class="display-4">Hi, I'm Muhammed Humraz</h1>
-    <p class="lead">BCA Student | Creative Designer | Tech Explorer</p>
-    <p>Blending design, AI, and events to craft meaningful experiences.</p>
+  <div class="container hero-content">
+    <h1 class="display-4 fw-bold">Hi, I'm Muhammed Humraz</h1>
+    <p class="lead fs-4">BCA Student | Creative Designer | Tech Explorer</p>
+    <p class="fs-5">Blending design, AI, and events to craft meaningful experiences.</p>
     <a href="#projects" class="btn btn-primary btn-lg mt-3">Explore Projects</a>
   </div>
 </section>
@@ -89,69 +200,77 @@
 <!-- Projects Section -->
 <section id="projects" class="py-5">
   <div class="container">
-    <h2 class="text-center mb-5">Featured Projects</h2>
+    <h2 class="text-center mb-5 section-title">Featured Projects</h2>
     <div class="row g-4">
       <!-- BYTE BEGIN Website -->
-      <div class="col-md-4">
+      <div class="col-md-6 col-lg-4">
         <div class="card project-card h-100">
-          <img src="https://via.placeholder.com/600x400?text=BYTE+BEGIN" class="card-img-top" alt="BYTE BEGIN Website">
-          <div class="card-body">
+          <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" class="card-img-top" alt="BYTE BEGIN Website">
+          <div class="card-body d-flex flex-column">
             <h3 class="card-title">BYTE BEGIN – Dept. Website</h3>
-            <p class="card-text">Official website for the CS department association featuring event details and team profiles.</p>
-            <a href="https://mhd-humraz.github.io/byte-begin-website/" target="_blank" class="btn btn-sm btn-primary">View Site</a>
-            <div class="mt-2">
-              <span class="badge bg-primary">HTML</span>
-              <span class="badge bg-secondary">CSS</span>
-              <span class="badge bg-info text-dark">JavaScript</span>
+            <p class="card-text flex-grow-1">Official website for the CS department association featuring event details and team profiles.</p>
+            <div class="mt-auto">
+              <a href="https://mhd-humraz.github.io/byte-begin-website/" target="_blank" class="btn btn-sm btn-primary">View Site</a>
+              <div class="mt-2">
+                <span class="badge bg-primary">HTML</span>
+                <span class="badge bg-secondary">CSS</span>
+                <span class="badge bg-info text-dark">JavaScript</span>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
       <!-- Memory Game -->
-      <div class="col-md-4">
+      <div class="col-md-6 col-lg-4">
         <div class="card project-card h-100">
-          <img src="https://via.placeholder.com/600x400?text=Memory+Game" class="card-img-top" alt="Memory Game">
-          <div class="card-body">
+          <img src="https://images.unsplash.com/photo-1611262588024-d12430b98920?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" class="card-img-top" alt="Memory Game">
+          <div class="card-body d-flex flex-column">
             <h3 class="card-title">Memory Game</h3>
-            <p class="card-text">Interactive game that tests pattern memory using card matching logic.</p>
-            <a href="https://mhd-humraz.github.io/memory-game/" target="_blank" class="btn btn-sm btn-primary">Play Now</a>
-            <div class="mt-2">
-              <span class="badge bg-primary">HTML</span>
-              <span class="badge bg-secondary">CSS</span>
-              <span class="badge bg-info text-dark">JavaScript</span>
+            <p class="card-text flex-grow-1">Interactive game that tests pattern memory using card matching logic.</p>
+            <div class="mt-auto">
+              <a href="https://mhd-humraz.github.io/memory-game/" target="_blank" class="btn btn-sm btn-primary">Play Now</a>
+              <div class="mt-2">
+                <span class="badge bg-primary">HTML</span>
+                <span class="badge bg-secondary">CSS</span>
+                <span class="badge bg-info text-dark">JavaScript</span>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
       <!-- HTML Beginner Site -->
-      <div class="col-md-4">
+      <div class="col-md-6 col-lg-4">
         <div class="card project-card h-100">
-          <img src="https://via.placeholder.com/600x400?text=Beginner+Site" class="card-img-top" alt="HTML Beginner Site">
-          <div class="card-body">
+          <img src="https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" class="card-img-top" alt="HTML Beginner Site">
+          <div class="card-body d-flex flex-column">
             <h3 class="card-title">HTML Beginner Site</h3>
-            <p class="card-text">A simple site demonstrating beginner-friendly HTML and CSS page design.</p>
-            <a href="https://mhd-humraz.github.io/html-website-beginner/" target="_blank" class="btn btn-sm btn-primary">View Project</a>
-            <div class="mt-2">
-              <span class="badge bg-primary">HTML</span>
-              <span class="badge bg-secondary">CSS</span>
+            <p class="card-text flex-grow-1">A simple site demonstrating beginner-friendly HTML and CSS page design.</p>
+            <div class="mt-auto">
+              <a href="https://mhd-humraz.github.io/html-website-beginner/" target="_blank" class="btn btn-sm btn-primary">View Project</a>
+              <div class="mt-2">
+                <span class="badge bg-primary">HTML</span>
+                <span class="badge bg-secondary">CSS</span>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
       <!-- Supermarket Site (GitHub) -->
-      <div class="col-md-4">
+      <div class="col-md-6 col-lg-4">
         <div class="card project-card h-100">
-          <img src="https://via.placeholder.com/600x400?text=Supermarket+Site" class="card-img-top" alt="Supermarket Website">
-          <div class="card-body">
+          <img src="https://images.unsplash.com/photo-1607082350899-7e105aa886ae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" class="card-img-top" alt="Supermarket Website">
+          <div class="card-body d-flex flex-column">
             <h3 class="card-title">Supermarket Website</h3>
-            <p class="card-text">Static UI layout for a supermarket website. Source code on GitHub.</p>
-            <a href="https://github.com/mhd-humraz/supermarket-website" target="_blank" class="btn btn-sm btn-primary">View Code</a>
-            <div class="mt-2">
-              <span class="badge bg-primary">HTML</span>
-              <span class="badge bg-secondary">CSS</span>
+            <p class="card-text flex-grow-1">Static UI layout for a supermarket website. Source code on GitHub.</p>
+            <div class="mt-auto">
+              <a href="https://github.com/mhd-humraz/supermarket-website" target="_blank" class="btn btn-sm btn-primary">View Code</a>
+              <div class="mt-2">
+                <span class="badge bg-primary">HTML</span>
+                <span class="badge bg-secondary">CSS</span>
+              </div>
             </div>
           </div>
         </div>
@@ -160,77 +279,105 @@
   </div>
 </section>
 
-<!-- The rest of the portfolio remains the same... -->
-<!-- Existing code above remains unchanged -->
-
 <!-- Skills Section -->
 <section id="skills" class="py-5 bg-light">
   <div class="container">
-    <h2 class="text-center mb-5">Skills & Tools</h2>
+    <h2 class="text-center mb-5 section-title">Skills & Tools</h2>
     <div class="row text-center g-4">
       <div class="col-6 col-md-3">
-        <div><i class="fab fa-html5 skill-icon"></i><h5>HTML/CSS</h5></div>
+        <div>
+          <i class="fab fa-html5 skill-icon mb-3"></i>
+          <h5>HTML/CSS</h5>
+          <p class="text-muted">Responsive Web Design</p>
+        </div>
       </div>
       <div class="col-6 col-md-3">
-        <div><i class="fab fa-wordpress skill-icon"></i><h5>WordPress</h5></div>
+        <div>
+          <i class="fab fa-wordpress skill-icon mb-3"></i>
+          <h5>WordPress</h5>
+          <p class="text-muted">Website Development</p>
+        </div>
       </div>
       <div class="col-6 col-md-3">
-        <div><i class="fas fa-palette skill-icon"></i><h5>Canva Design</h5></div>
+        <div>
+          <i class="fas fa-palette skill-icon mb-3"></i>
+          <h5>Canva Design</h5>
+          <p class="text-muted">Visual Content Creation</p>
+        </div>
       </div>
       <div class="col-6 col-md-3">
-        <div><i class="fas fa-robot skill-icon"></i><h5>AI Integration</h5></div>
+        <div>
+          <i class="fas fa-robot skill-icon mb-3"></i>
+          <h5>AI Integration</h5>
+          <p class="text-muted">Smart Solutions</p>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- About Section -->
-<section id="about" class="py-5">
+<section id="about" class="py-5 about-section">
   <div class="container">
     <div class="row align-items-center">
       <div class="col-lg-6">
-        <h2>About Me</h2>
-        <p class="lead">I’m Humraz </p>
-        <p> A BCA student at MES M.K. Mackar Pillay College with a passion for technology, design, and problem-solving. I’ve completed a WordPress course and enjoy web development, poster designing with Canva, and creating educational platforms for programming learners. As an active event planner for BYTE BEGIN, our Computer Science Department Association, I organize tech fests and workshops. I’m also the founder of Origin Media, a business specializing in wall posters and digital art.
-          Beyond tech, I love drawing, learning acoustic guitar, and participating in esports and college events, always eager to grow and take on new challenges.</p>
-        <h5 class="mt-3">Hobbies:</h5>
-        <div class="d-flex flex-wrap gap-2">
+        <h2 class="section-title">About Me</h2>
+        <p class="lead">I'm Humraz</p>
+        <p>A BCA student at MES M.K. Mackar Pillay College with a passion for technology, design, and problem-solving. I've completed a WordPress course and enjoy web development, poster designing with Canva, and creating educational platforms for programming learners.</p>
+        <p>As an active event planner for BYTE BEGIN, our Computer Science Department Association, I organize tech fests and workshops. I'm also the founder of Origin Media, a business specializing in wall posters and digital art.</p>
+        <p>Beyond tech, I love drawing, learning acoustic guitar, and participating in esports and college events, always eager to grow and take on new challenges.</p>
+        
+        <h5 class="mt-4">Hobbies:</h5>
+        <div class="d-flex flex-wrap gap-2 mb-4">
           <span class="badge bg-dark">Drawing</span>
           <span class="badge bg-dark">Guitar</span>
           <span class="badge bg-dark">Esports</span>
-          <a href="assets/Muhammed-Humraz-Resume.docx" download class="btn btn-outline-light btn-lg mt-3">Download Resume</a>
+          <span class="badge bg-dark">Event Planning</span>
+          <span class="badge bg-dark">Digital Art</span>
         </div>
+        
+        <a href="assets/Muhammed-Humraz-Resume.docx" download class="btn btn-primary btn-lg">Download Resume</a>
       </div>
       <div class="col-lg-6 text-center mt-4 mt-lg-0">
-        <img src="images/humraz.png" alt="Humraz" class="img-fluid rounded shadow" />
+        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Humraz" class="img-fluid profile-img" />
       </div>
     </div>
   </div>
 </section>
 
 <!-- Contact Section -->
-<section id="contact" class="py-5 bg-light">                                                <div class="card project-card h-100">
-  <div class="container"> 
-    <h2 class="text-center mb-5">Let's Connect</h2>
+<section id="contact" class="py-5 bg-light">
+  <div class="container">
+    <h2 class="text-center mb-5 section-title">Let's Connect</h2>
     <div class="row justify-content-center">
       <div class="col-md-8">
-       <form id="my-form" action="https://formspree.io/f/xldbkled" method="POST">
-  <label>Email:</label>
-  <input type="email" name="email" />
-  <label>Message:</label>
-  <input type="text" name="message" />
-  <button id="my-form-button">Submit</button>
-  <p id="my-form-status"></p>
-</form>
-        <div class="text-center mt-4">
-          <a href="#" class="text-dark mx-3"><i class="fab fa-github fa-2x"></i></a>
-          <a href="#" class="text-dark mx-3"><i class="fab fa-linkedin fa-2x"></i></a>
-          <a href="#" class="text-dark mx-3"><i class="fab fa-instagram fa-2x"></i></a>
+        <div class="contact-form">
+          <form id="my-form" action="https://formspree.io/f/xldbkled" method="POST">
+            <div class="mb-3">
+              <label for="name" class="form-label">Name</label>
+              <input type="text" class="form-control" id="name" name="name" required>
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input type="email" class="form-control" id="email" name="email" required>
+            </div>
+            <div class="mb-3">
+              <label for="message" class="form-label">Message</label>
+              <textarea class="form-control" id="message" name="message" rows="4" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary w-100" id="my-form-button">Send Message</button>
+            <p id="my-form-status" class="mt-3 text-center"></p>
+          </form>
         </div>
-
+        
+        <div class="text-center mt-5">
+          <a href="https://github.com/mhd-humraz" target="_blank" class="text-dark mx-3 social-icon"><i class="fab fa-github fa-2x"></i></a>
+          <a href="https://linkedin.com/in/muhammed-humraz" target="_blank" class="text-dark mx-3 social-icon"><i class="fab fa-linkedin fa-2x"></i></a>
+          <a href="https://instagram.com/mhd_humraz" target="_blank" class="text-dark mx-3 social-icon"><i class="fab fa-instagram fa-2x"></i></a>
+        </div>
       </div>
     </div>
-  </div>                                                                                         </div>
+  </div>
 </section>
 
 <!-- Footer -->
@@ -240,14 +387,31 @@
   </div>
 </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js">
-</script>
-  <script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  // Navbar scroll effect
+  window.addEventListener('scroll', function() {
+    const navbar = document.getElementById('navbar');
+    if (window.scrollY > 50) {
+      navbar.classList.add('scrolled');
+    } else {
+      navbar.classList.remove('scrolled');
+    }
+  });
+
+  // Form submission handler
   var form = document.getElementById("my-form");
   
   async function handleSubmit(event) {
     event.preventDefault();
     var status = document.getElementById("my-form-status");
+    var button = document.getElementById("my-form-button");
+    var originalText = button.textContent;
+    
+    // Show loading state
+    button.textContent = "Sending...";
+    button.disabled = true;
+    
     var data = new FormData(event.target);
     fetch(event.target.action, {
       method: form.method,
@@ -257,22 +421,30 @@
       }
     }).then(response => {
       if (response.ok) {
-        status.innerHTML = "Thanks for your submission!";
-        form.reset()
+        status.innerHTML = "Thanks for your submission! I'll get back to you soon.";
+        status.classList.add("text-success");
+        form.reset();
       } else {
         response.json().then(data => {
           if (Object.hasOwn(data, 'errors')) {
-            status.innerHTML = data["errors"].map(error => error["message"]).join(", ")
+            status.innerHTML = data["errors"].map(error => error["message"]).join(", ");
           } else {
-            status.innerHTML = "Oops! There was a problem submitting your form"
+            status.innerHTML = "Oops! There was a problem submitting your form";
           }
-        })
+        });
+        status.classList.add("text-danger");
       }
     }).catch(error => {
-      status.innerHTML = "Oops! There was a problem submitting your form"
+      status.innerHTML = "Oops! There was a problem submitting your form";
+      status.classList.add("text-danger");
+    }).finally(() => {
+      // Reset button state
+      button.textContent = originalText;
+      button.disabled = false;
     });
   }
-  form.addEventListener("submit", handleSubmit)
+  
+  form.addEventListener("submit", handleSubmit);
 </script>
 </body>
 </html>
